@@ -1,0 +1,16 @@
+{
+  "name": "rplcr",
+  "version": "1.0.0",
+  "description": "Gulp project for string replacement in source file from within a gulp task",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Todd E. Qualls",
+  "license": "GNU",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-batch-replace": "0.0.0",
+    "gulp-replace": "^0.5.3"
+  }
+}
