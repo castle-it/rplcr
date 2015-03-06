@@ -1,19 +1,30 @@
 var gulp = require('gulp');
-var replace = require('gulp-batch-replace');
+var batchReplace = require('gulp-batch-replace');
 
 gulp.task('default', function() {
-  console.log('hello, gulp');
-});
+  console.log('Rewriting project URLs for staging...');
+	var urlsSwaps = [
+		['http://localhost', 'https://staging.kewlhost.com'],
+		["baseRealtimeUrl = 'https://staging", "baseRealtimeUrl = 'https://adestaging"]
 
-var swaps = [
-	['http://localhost', 'https://staging.castleworldwide.com'],
-	["baseRealtimeUrl = 'https://staging", "baseRealtimeUrl = 'https://adestaging"]
+	];
+	gulp.src(['./dev/urlFile.js'])
+	.pipe(batchReplace(urlsSwaps))
+	.pipe(gulp.dest('./stage/'));
 
-];
+	var hosts = {
+		dev: 'development_server_name',
+		stage: 'stage_server_name',
+		prod: 'prod_server_name'
+	};
+	console.log('Rewriting project connection strings for staging...');
+	var connHostFrag = 'Data Source=';
+	var connSwaps = [
+		[connHostFrag+hosts.dev, connHostFrag+hosts.stage]
+	];
 
-gulp.task('stage_urls', function() {
-  gulp.src(['file.js'])
-    .pipe(replace(swaps))
-    .pipe(gulp.dest('./stage/file.js'));
+	gulp.src(['./dev/conn.txt'])
+	.pipe(batchReplace(connSwaps))
+	.pipe(gulp.dest('./stage/'));
 
 });

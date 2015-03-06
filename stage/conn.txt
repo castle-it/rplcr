@@ -1,0 +1,1 @@
+    <add name="ADE" connectionString="Data Source=stage_server_name;Initial Catalog=AppDb;Integrated Security=False;User ID=app_user;Password=haxz0r1337;" providerName="System.Data.SqlClient" />
